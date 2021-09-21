@@ -17,8 +17,10 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
           body: Container(
               child: Center(
-                child: Text("Hello SD", style: TextStyle(fontSize: 22.0)),
-          )),
+                child:Image(
+                  image:AssetImage("assets/images/back_arrow_icon.png"),
+                )
+              )),
         ));
   }
 }
