@@ -7,16 +7,16 @@ class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
+
 final List<String> entries = <String>['A', 'B', 'C'];
 final List<int> colorCodes = <int>[600, 500, 100];
-
 
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Todo List "),
+        title: Text("Todo List"),
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -35,21 +35,57 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-      body:ListView.builder(
-          itemCount: entries.length,padding:const EdgeInsets.all(8),
+      body: ListView.builder(
+          itemCount: 30,
           itemBuilder: (BuildContext context, int index) {
             return Container(
               height: 50,
-              color: Colors.amber[colorCodes[index]],
-              child: Center(child: Text('Entry ${entries[index]}')),
+              color: Colors.white,
+              child: Row(
+                children: [
+                  VerticalDivider(color: Colors.blue, thickness: 4),
+                  Text('First Task'),
+                  Spacer(),
+                  Icon(
+                    Icons.priority_high_outlined,
+                  ),
+                ],
+              ),
+              margin: const EdgeInsets.all(4),
             );
-          }
+          }),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+             showDialog(
+              context: context,
+              builder: (ctx) => AlertDialog(
+                title: Text("Add Task"),
+                actions: <Widget>[
+                  TextFormField(
+                    initialValue: '',
+                    decoration: InputDecoration(
+                      labelText: 'New Todo',
+                      border: OutlineInputBorder(),
 
-      )
-      ,
-      floatingActionButton: FloatingActionButton(onPressed: () {  },
-          child: const Icon(Icons.add)
-      ),
+                    ),
+
+
+                  ),
+                  Row(
+                    children: [
+                    TextButton(
+                          onPressed: () => makeToast("CANCELLED"),
+                          child: Text("CANCEL")),
+                      TextButton(onPressed: () => makeToast("OK"), child: Text("OKAY")),
+
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.end,
+                  )
+                ],
+              ),
+            );
+          },
+          child: const Icon(Icons.add)),
     );
   }
 
@@ -64,11 +100,14 @@ class _HomeState extends State<Home> {
         break;
     }
   }
+
+
+
 }
 
 void makeToast(String s) {
   Fluttertoast.showToast(
-      msg:s,
+      msg: s,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
