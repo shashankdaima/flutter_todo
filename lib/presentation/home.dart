@@ -39,24 +39,31 @@ class _HomeState extends State<Home> {
           itemCount: 30,
           itemBuilder: (BuildContext context, int index) {
             return Container(
-              height: 50,
-              color: Colors.white,
-              child: Row(
-                children: [
-                  VerticalDivider(color: Colors.blue, thickness: 4),
-                  Text('First Task'),
-                  Spacer(),
-                  Icon(
-                    Icons.priority_high_outlined,
+                height: 50,
+                margin: const EdgeInsets.all(4),
+                color: Colors.white,
+                child: Material(
+                  color: Colors.white.withOpacity(0.0),
+                  child: InkWell(
+                    child: Row(
+                      children: [
+                        VerticalDivider(color: Colors.blue, thickness: 4),
+                        Text('First Task'),
+                        Spacer(),
+                        Icon(
+                          Icons.priority_high_outlined,
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      print("Wow! Ripple");
+                    },
                   ),
-                ],
-              ),
-              margin: const EdgeInsets.all(4),
-            );
+                ));
           }),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-             showDialog(
+            showDialog(
               context: context,
               builder: (ctx) => AlertDialog(
                 title: Text("Add Task"),
@@ -66,18 +73,16 @@ class _HomeState extends State<Home> {
                     decoration: InputDecoration(
                       labelText: 'New Todo',
                       border: OutlineInputBorder(),
-
                     ),
-
-
                   ),
                   Row(
                     children: [
-                    TextButton(
+                      TextButton(
                           onPressed: () => makeToast("CANCELLED"),
                           child: Text("CANCEL")),
-                      TextButton(onPressed: () => makeToast("OK"), child: Text("OKAY")),
-
+                      TextButton(
+                          onPressed: () => makeToast("OK"),
+                          child: Text("OKAY")),
                     ],
                     mainAxisAlignment: MainAxisAlignment.end,
                   )
@@ -100,9 +105,6 @@ class _HomeState extends State<Home> {
         break;
     }
   }
-
-
-
 }
 
 void makeToast(String s) {
